@@ -8,10 +8,6 @@ namespace DWP_API_task
 {
     public static class UserRequests
     {
-
-        //method to get Users object of all users in a given city
-
-
         public static async Task<List<User>> getAllUsersInACity(string city)
         {
             List<User> usersInCity = new List<User>();
@@ -19,7 +15,6 @@ namespace DWP_API_task
             return usersInCity;
         }
 
-        //method to get all users with a given distance of a given city
         public static async Task<List<User>> getAllUserGivenDistanceFromCity(string city, double distance)
         {
             //get all users
@@ -43,19 +38,10 @@ namespace DWP_API_task
                 // if so add to new list
                 dist = DistanceCalculations.getDistanceBetweenToLocations(u.latitude, u.longitude,
                                             cityCoordinates[0], cityCoordinates[1]);
-
-
-
-
-
-
-
-
                 if(dist <= distance)
                 {
                     requiredUsers.Add(u);
                 }
-
             }
             return requiredUsers;
 
@@ -67,16 +53,12 @@ namespace DWP_API_task
         //method to get in city or within distance of city
         public static async Task<List<User>> getAllUsersInACityOrWithinDistance(string city, double distance)
         {
-
             List<User> usersInCity = await UserRequests.getAllUsersInACity(city);
             List<User> usersInDistance = await UserRequests.getAllUserGivenDistanceFromCity(city, distance);
 
             //add to Users together excluding repeats
-
             List<User> usersInCityAndDistance = new List<User>();
-
             usersInCityAndDistance.AddRange(usersInCity);
-
             foreach (User u in usersInDistance)
             {
                 if(!usersInCity.Contains(u))
@@ -84,8 +66,7 @@ namespace DWP_API_task
                     usersInCityAndDistance.Add(u);
                 }
 
-            }
-            
+            }          
             return usersInCityAndDistance;
 
         }

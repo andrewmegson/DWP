@@ -16,24 +16,17 @@ namespace DWP_API_task.Controllers
         [HttpGet]
         public async Task<ActionResult<string>> GetAsync()
         {
-
-            //London and 50 should be values added to url
             List<User> users = await UserRequests.getAllUsersInACityOrWithinDistance("London", 50);
-            return JsonConvert.SerializeObject(users);
-
-
-            //return new string[] { "value1", "value2" };
+            return JsonConvert.SerializeObject(users);;
         }
 
-        // GET api/values/5
+        // GET api/values/London/50
         [HttpGet("{city}/{distance}")]
         public async Task<ActionResult<string>> GetAsync(string city, double distance)
         {
             List<User> users = await UserRequests.getAllUsersInACityOrWithinDistance(city, distance);
             return JsonConvert.SerializeObject(users);
 
-
- 
         }
 
 
