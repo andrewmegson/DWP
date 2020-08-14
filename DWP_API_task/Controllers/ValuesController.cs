@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DWP_API_task.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +14,7 @@ namespace DWP_API_task.Controllers
         [HttpGet]
         public async Task<ActionResult<string>> GetAsync()
         {
-            List<User> users = await UserRequests.getAllUsersInACityOrWithinDistance("London", 50);
+            List<User> users = await UserRequests.GetAllUsersInACityOrWithinDistance("London", 50);
             return JsonConvert.SerializeObject(users);;
         }
 
@@ -24,7 +22,10 @@ namespace DWP_API_task.Controllers
         [HttpGet("{city}/{distance}")]
         public async Task<ActionResult<string>> GetAsync(string city, double distance)
         {
-            List<User> users = await UserRequests.getAllUsersInACityOrWithinDistance(city, distance);
+            //try catch loop
+
+
+            List<User> users = await UserRequests.GetAllUsersInACityOrWithinDistance(city, distance);
             return JsonConvert.SerializeObject(users);
 
         }

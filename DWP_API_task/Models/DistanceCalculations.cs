@@ -10,9 +10,9 @@ namespace DWP_API_task
     public static class DistanceCalculations
 
     {
-        private static string GoogleMapsApiKey = "AIzaSyAiX3oDMxF7P29rDQmGgReE1eC6W1BBNMk";
+        private static readonly string GoogleMapsApiKey = "AIzaSyAiX3oDMxF7P29rDQmGgReE1eC6W1BBNMk";
 
-        public static double getDistanceBetweenToLocations(double lat1, double long1, double lat2, double long2)
+        public static double GetDistanceBetweenToLocations(double lat1, double long1, double lat2, double long2)
         {
             Coordinate location1 = new Coordinate(lat1, long1);
             Coordinate location2 = new Coordinate(lat2, long2);
@@ -20,7 +20,7 @@ namespace DWP_API_task
             return distance;
         }
 
-        public static double[] getCoordinatesOfLocation(string location)
+        public static double[] GetCoordinatesOfLocation(string location)
         {
             string address = location;
             var locationService = new GoogleLocationService(GoogleMapsApiKey);

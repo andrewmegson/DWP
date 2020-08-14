@@ -6,7 +6,7 @@ namespace DWP_API_task
     public static class HttpRequests
     {
         private static readonly HttpClient client = new HttpClient();
-        public static async Task<string> getHttpRequest(string url)
+        public static async Task<string> GetHttpRequest(string url)
         {
             string response = await client.GetStringAsync(url);           
             return response;
