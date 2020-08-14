@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DWP_API_task.Models
 {
@@ -15,7 +12,6 @@ namespace DWP_API_task.Models
         public string ip_address { get; set; }
         public double latitude { get; set; }
         public double longitude { get; set; }
-
 
         public User()
         { }
