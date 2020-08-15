@@ -1,5 +1,4 @@
 using DWP_API_task;
-using Newtonsoft.Json;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,9 +11,6 @@ namespace Tests
     public class UserRequestsTests
     {
 
-
-
-
         [Test]
         public async Task TestGetAllUsersListedInACity1()
         {
@@ -23,34 +19,40 @@ namespace Tests
         }
 
         [Test]
-        public void TestGetAllUsersListedInACity2()
+        public async Task TestGetAllUsersListedInACity2()
         {
-            // List<User> allUsers = await UserRequests.GetAllUsersListedInACity("LonDon");
+           // Exception exceptionMessage = Assert.Throws<Exception>(async () =>
+           // await UserRequests.GetAllUsersListedInACity("London");
+            // Assert.AreEqual("The city has not been entered in the correct format",
+            // exceptionMessage.Message);
 
+            string exceptionMessage = "";
+            try
+            {
+                List<User> allUsers = await UserRequests.GetAllUsersListedInACity("LonDon");
+            }
+            catch (Exception ex)
+            {
+                 exceptionMessage = ex.Message;
+            }
+            Assert.AreEqual("The city has not been entered in the correct format", exceptionMessage);
 
-            Exception exceptionMessage = Assert.Throws<Exception>(async () => 
-            await UserRequests.GetAllUsersListedInACity("LonDon"));
-            Assert.AreEqual("The city has not been entered in the correct format",
-                exceptionMessage.Message);
         }
 
 
         [Test]
-        public async Task TestGetAllUserGivenDistanceFromCity()
+        public async Task TestGetAllUserGivenDistanceFromCity1()
         {
             List<User> allUsers = await UserRequests.GetAllUserGivenDistanceFromCity("London", 50);
-
-
-            //Assert.AreEqual(allUsers.Count, 1000);
+            Assert.AreEqual(allUsers.Count, 3);
         }
+
 
         [Test]
         public async Task TestGetAllUsersInACityOrWithinDistance()
         {
             List<User> allUsers = await UserRequests.GetAllUsersInACityOrWithinDistance("London", 50);
-
-
-            //Assert.AreEqual(allUsers.Count, 1000);
+            Assert.AreEqual(allUsers.Count, 9);     
         }
 
     }
