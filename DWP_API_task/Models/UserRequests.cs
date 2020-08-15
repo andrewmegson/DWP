@@ -44,17 +44,6 @@ namespace DWP_API_task
         /// distance from the given city according to Dwp Api </returns>
         public static async Task<List<User>> GetAllUserGivenDistanceFromCity(string city, double distance)
         {
-
-            //paramter check distance 
-            Regex expression = new Regex(@"^[0-9]+\.?[0-9]*$");
-            bool result = expression.IsMatch(distance.ToString());
-
-            if (!result)
-            {
-                throw new Exception("The distance has not been entered in the correct format");
-            }
-
-
             //get all users
             List<User> allUsers = new List<User>();
             allUsers = await DwpApiRequests.GetAllUsers();
@@ -98,21 +87,21 @@ namespace DWP_API_task
         /// they are with the given distance from the given city according to Dwp Api</returns>
         public static async Task<List<User>> GetAllUsersInACityOrWithinDistance(string city, double distance)
         {
-            List<User> usersInCity = await UserRequests.GetAllUsersListedInACity(city);
-            List<User> usersInDistance = await UserRequests.GetAllUserGivenDistanceFromCity(city, distance);
+                List<User> usersInCity = await UserRequests.GetAllUsersListedInACity(city);
+                List<User> usersInDistance = await UserRequests.GetAllUserGivenDistanceFromCity(city, distance);
 
-            //add to Users together excluding repeats
-            List<User> usersInCityAndDistance = new List<User>();
-            usersInCityAndDistance.AddRange(usersInCity);
-            foreach (User u in usersInDistance)
-            {
-                if(!usersInCity.Contains(u))
+                //add to Users together excluding repeats
+                List<User> usersInCityAndDistance = new List<User>();
+                usersInCityAndDistance.AddRange(usersInCity);
+                foreach (User u in usersInDistance)
                 {
-                    usersInCityAndDistance.Add(u);
-                }
+                    if (!usersInCity.Contains(u))
+                    {
+                        usersInCityAndDistance.Add(u);
+                    }
 
-            }          
-            return usersInCityAndDistance;
+                }
+                return usersInCityAndDistance;
 
         }
 
