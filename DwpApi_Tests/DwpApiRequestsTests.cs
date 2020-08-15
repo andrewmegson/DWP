@@ -1,18 +1,37 @@
+using DWP_API_task;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+
 
 namespace Tests
 {
     public class DwpApiRequestsTests
     {
-        [SetUp]
-        public void Setup()
+
+
+        [Test]
+        public async Task TestGetAllUsersAsync()
         {
+            List<User> allUsers = await DwpApiRequests.GetAllUsers();
+            Assert.AreEqual(allUsers.Count, 1000);
         }
 
         [Test]
-        public void Test1()
+        public async Task TestGetAllUsersListedInCity1()
         {
-            Assert.Pass();
+            List<User> allUsersInCity = await DwpApiRequests.GetAllUsersListedInCity("London");
+            Assert.AreEqual(allUsersInCity.Count, 6);
         }
+
+        [Test]
+        public async Task TestGetAllUsersListedInCity2()
+        {
+            List<User> allUsersInCity = await DwpApiRequests.GetAllUsersListedInCity("New York");
+            Assert.AreEqual(allUsersInCity.Count, 0);
+        }
+
+
     }
 }
