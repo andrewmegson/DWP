@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System;
+using System.Linq;
 
 namespace DWP_API_task
 {
@@ -55,22 +56,29 @@ namespace DWP_API_task
             //check which users are within distance to city
             //loop if user in within distance add to Users object
 
-            List<User> requiredUsers = new List<User>();
-            double dist = 0;
 
-            foreach (User u in allUsers)
-            {
+            List<User> usersDistanceFromCity = allUsers.Where(u => DistanceCalculations.GetDistanceBetweenTwoLocations(
+                u.latitude, u.longitude,cityCoordinates[0], cityCoordinates[1]) <= distance).ToList();
 
-                //for each u check if distance between coordinates equal or less than given distance
-                // if so add to new list
-                dist = DistanceCalculations.GetDistanceBetweenTwoLocations(u.latitude, u.longitude,
-                                            cityCoordinates[0], cityCoordinates[1]);
-                if(dist <= distance)
-                {
-                    requiredUsers.Add(u);
-                }
-            }
-            return requiredUsers;
+
+            return usersDistanceFromCity;
+            
+            //List<User> requiredUsers = new List<User>();
+            //double dist = 0;
+
+            //foreach (User u in allUsers)
+            //{
+
+            //    //for each u check if distance between coordinates equal or less than given distance
+            //    // if so add to new list
+            //    dist = DistanceCalculations.GetDistanceBetweenTwoLocations(u.latitude, u.longitude,
+            //                                cityCoordinates[0], cityCoordinates[1]);
+            //    if(dist <= distance)
+            //    {
+            //        requiredUsers.Add(u);
+            //    }
+            //}
+            //return requiredUsers;
 
         }
 
@@ -90,17 +98,21 @@ namespace DWP_API_task
                 List<User> usersInCity = await UserRequests.GetAllUsersListedInACity(city);
                 List<User> usersInDistance = await UserRequests.GetAllUserGivenDistanceFromCity(city, distance);
 
-                //add to Users together excluding repeats
-                List<User> usersInCityAndDistance = new List<User>();
-                usersInCityAndDistance.AddRange(usersInCity);
-                foreach (User u in usersInDistance)
-                {
-                    if (!usersInCity.Contains(u))
-                    {
-                        usersInCityAndDistance.Add(u);
-                    }
+                ////add to Users together excluding repeats
+                //List<User> usersInCityAndDistance = new List<User>();
+                //usersInCityAndDistance.AddRange(usersInCity);
+                //foreach (User u in usersInDistance)
+                //{
+                //    if (!usersInCity.Contains(u))
+                //    {
+                //        usersInCityAndDistance.Add(u);
+                //    }
 
-                }
+                //}
+
+            List<User> usersInCityAndDistance = usersInCity.Union(usersInDistance).ToList();
+
+
                 return usersInCityAndDistance;
 
         }
