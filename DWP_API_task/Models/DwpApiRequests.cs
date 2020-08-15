@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using DWP_API_task.Models;
 
 namespace DWP_API_task
 {

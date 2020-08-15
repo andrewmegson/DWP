@@ -1,5 +1,4 @@
-﻿using DWP_API_task.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace DWP_API_task
@@ -43,7 +42,7 @@ namespace DWP_API_task
 
                 //for each u check if distance between coordinates equal or less than given distance
                 // if so add to new list
-                dist = DistanceCalculations.GetDistanceBetweenToLocations(u.latitude, u.longitude,
+                dist = DistanceCalculations.GetDistanceBetweenTwoLocations(u.latitude, u.longitude,
                                             cityCoordinates[0], cityCoordinates[1]);
                 if(dist <= distance)
                 {

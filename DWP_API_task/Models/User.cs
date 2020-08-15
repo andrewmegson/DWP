@@ -1,7 +1,11 @@
 ﻿using System;
 
-namespace DWP_API_task.Models
+namespace DWP_API_task
+
 {
+    /// <summary>
+    /// Class to hold all info of a User
+    /// </summary>
     public class User
     {
        
@@ -16,6 +20,16 @@ namespace DWP_API_task.Models
         public User()
         { }
 
+        /// <summary>
+        /// Constructor of class to create a User
+        /// </summary>
+        /// <param name="firstName"> A string to represent first name </param>
+        /// <param name="lastName"> A string to represent first name </param>
+        /// <param name="id"> A double to represent id </param>
+        /// <param name="email"> A string to represent email </param>
+        /// <param name="ipAddress"> A string to represent Ip Address </param>
+        /// <param name="latitude"> A double to represent latitude </param>
+        /// <param name="longitude"> A double to represent longitude </param>
         public User(string firstName, string lastName, int id, string email,string ipAddress,
             double latitude, double longitude)
         {
@@ -28,12 +42,23 @@ namespace DWP_API_task.Models
             this.longitude = longitude;
         }
 
+
+        /// <summary>
+        /// Equals override method to ensure logical equivalence
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns> A boolean value </returns>
         public override bool Equals(object obj)
         {
             return Equals(obj as User);
         }
 
-        public bool Equals(User other)
+        /// <summary>
+        /// Equals override method to ensure logical equivalence
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns> A boolean value </returns>
+        private bool Equals(User other)
         {
             return other != null &&
                    id == other.id &&
@@ -45,6 +70,10 @@ namespace DWP_API_task.Models
                    longitude == other.longitude;
         }
 
+        /// <summary>
+        /// Hashcode override method to ensure logical equivalence
+        /// </summary>
+        /// <returns> A unigue hashcode generated from class members </returns>
         public override int GetHashCode()
         {
             return HashCode.Combine(id, first_name, last_name, email, ip_address, latitude, longitude);
