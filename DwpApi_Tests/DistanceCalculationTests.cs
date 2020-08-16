@@ -11,7 +11,7 @@ namespace Tests
         [Test]
         public void TestGetDistanceBetweenTwoLocations()
         {
-            double distance = 248;  //  calculated from https://gps-coordinates.org/
+            double distance = 248; 
             double lat1 = 51.507222;  //London
             double long1 = -0.1275;
             double lat2 = 54.9783; //Newcastle

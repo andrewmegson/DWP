@@ -21,11 +21,6 @@ namespace Tests
         [Test]
         public async Task TestGetAllUsersListedInACity2()
         {
-           // Exception exceptionMessage = Assert.Throws<Exception>(async () =>
-           // await UserRequests.GetAllUsersListedInACity("London");
-            // Assert.AreEqual("The city has not been entered in the correct format",
-            // exceptionMessage.Message);
-
             string exceptionMessage = "";
             try
             {
@@ -35,7 +30,8 @@ namespace Tests
             {
                  exceptionMessage = ex.Message;
             }
-            Assert.AreEqual("The city has not been entered in the correct format", exceptionMessage);
+            Assert.AreEqual("The city has not been entered in the correct format" +
+                " i.e api/values/london or api/values/london/50", exceptionMessage);
 
         }
 
@@ -49,10 +45,17 @@ namespace Tests
 
 
         [Test]
-        public async Task TestGetAllUsersInACityOrWithinDistance()
+        public async Task TestGetAllUsersInACityOrWithinDistance1()
         {
             List<User> allUsers = await UserRequests.GetAllUsersInACityOrWithinDistance("London", 50);
             Assert.AreEqual(allUsers.Count, 9);     
+        }
+
+        [Test]
+        public async Task TestGetAllUsersInACityOrWithinDistance2()
+        {
+            List<User> allUsers = await UserRequests.GetAllUsersInACityOrWithinDistance("London", 30);
+            Assert.AreEqual(allUsers.Count, 8);
         }
 
     }

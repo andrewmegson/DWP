@@ -28,8 +28,8 @@ namespace Tests
         [Test]
         public async Task TestGetAllUsersListedInCity2()
         {
-            List<User> allUsersInCity = await DwpApiRequests.GetAllUsersListedInCity("New York");
-            Assert.AreEqual(allUsersInCity.Count, 0);
+            List<User> allUsersInCity = await DwpApiRequests.GetAllUsersListedInCity("Sydney");
+            Assert.AreEqual(allUsersInCity.Count, 1);
         }
 
 
