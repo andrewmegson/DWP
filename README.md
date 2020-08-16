@@ -1,5 +1,5 @@
 # DWP
-I choose to code the task in C#.
+I choose to code the task in C# using the .Net Core framework.
 
 I set up the API so that it can be called using 3 different url requests
 
